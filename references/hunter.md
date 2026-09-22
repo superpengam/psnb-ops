@@ -1,6 +1,6 @@
 # TRACK=HUNTER
 
-禁止读旧 `ck-hunter.md`。跑脚本：
+不要读外部猎取长文档。跑脚本：
 
 ```
 python scripts/hunt.py --query "title=\"Directory listing for /\" && body=\".env\""

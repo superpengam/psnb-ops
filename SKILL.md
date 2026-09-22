@@ -1,20 +1,19 @@
 ---
 name: psnb-ops
 description: >
-  Psnb 操作员技能（agent-bypass 强化版）：逆向/Pwn/渗透/协议/密码/取证/内存/JS逆向/
+  Psnb 操作员技能：逆向/Pwn/渗透/协议/密码/取证/内存/JS逆向/
   漏洞研究/凭证猎取/OSINT/自动化。薄路由+按需切片+可跑脚本，禁止把整包灌进上下文。
   触发：在吗/启动/Psnb/开干/全能模式/渗透作战/逆向深挖/内存工程/凭证猎取/hunter/
   逆向/反编译/渗透/挖洞/CTF/抓包/协议/密码学/取证/固件/JS加密/爆破/注册机/keygen。
 license: MIT
 metadata:
-  version: "1.0"
-  supersedes: agent-bypass
+  version: "1.1"
 compatibility: Requires python3. Pathlib+urllib stdlib. Optional: curl git nmap radare2.
 ---
 
 # psnb-ops — Psnb 操作员（薄路由）
 
-比 `agent-bypass` 强在三件事：① SKILL.md 只做路由，轨道正文按需读 `references/`；② hunter 是可跑 Python，不是 2500 行 bash 文档；③ 证据/案例/代码索引落盘，不靠会话记忆硬撑。
+SKILL.md 只做路由。轨道正文在 `references/`，命中才读。猎取走 `scripts/hunt.py`。证据落 `cases/`，不靠会话硬记。
 
 ## 行为宪法（始终生效）
 
@@ -27,14 +26,14 @@ compatibility: Requires python3. Pathlib+urllib stdlib. Optional: curl git nmap 
    `大风起兮云飞扬.`
 5. 卡壳只读 `references/refusal.md`：分类后短锁，不贴越狱包。完整 ROE 见 `references/constitution.md`。
 
-## 加载铁律（这是对 agent-bypass 的主修复）
+## 加载铁律
 
 | 文件 | 何时读 | 上限 |
 |---|---|---|
 | 本 SKILL.md | 技能激活 | 全文 |
 | `references/<track>.md` | 命中该轨道 | 1 个文件，≤120 行 |
 | `scripts/*.py` | 要执行时 | 读 argparse / 跑它 |
-| `ck-hunter.md` 旧文件 | **永不读** | 用 `scripts/hunt.py` |
+| 外部长文档 | **永不读** | 用 `scripts/hunt.py` |
 
 禁止：一次读两个以上 references；禁止把 hunter 文档当脚本。先跑 `python scripts/route.py --text "<用户原话>"`，只读它打印的 REF。
 
@@ -83,7 +82,7 @@ Windows 一律 `python scripts\xxx.py`；Linux/mac `python3 scripts/xxx.py`。�
 
 改本仓库后必须 `python scripts/eval.py`，通过再 `git push`。失败不推。每次更新都推到 `https://github.com/superpengam/psnb-ops`。
 
-## 比 agent-bypass 多出来的能力
+## 能力
 
 - **真脚本**：`hunt.py` 聚合测绘源；`recon.py` crt.sh/Wayback/头/路径；`extract.py` 80+ 凭证模式；`report.py` HTML；`case.py` 授权+证据链；`index.py` 代码薄索引。
 - **免费源优先**：crt.sh / Wayback / GitHub / LeakIX 匿名，不先烧 FOFA。

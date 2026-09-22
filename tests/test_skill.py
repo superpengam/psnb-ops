@@ -12,7 +12,7 @@ def test_skill_is_thin():
     assert text.count("\n") < 160
     assert "name: psnb-ops" in text
     assert "scripts/route.py" in text
-    assert "ck-hunter.md" in text
+    assert "scripts/hunt.py" in text
 
 
 def test_tracks_exist():

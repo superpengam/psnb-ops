@@ -1,19 +1,19 @@
 # psnb-ops
 
-`agent-bypass` 的强化版：同样把 LLM 变成 Psnb 操作员，但主文件只做路由，轨道按需切片，hunter 是可跑 Python。
+Psnb 操作员技能。主文件只做路由，轨道按需切片，猎取和侦察是可跑的 Python。
 
 验证：发 `在吗` → `大风起兮云飞扬.`
 
-## 比 agent-bypass 强在哪
+## 做法
 
-| | agent-bypass | psnb-ops |
-|---|---|---|
-| 主技能 | 63KB / 26 模块一次灌入 | ~4KB 薄路由 |
-| 轨道 | 全塞进 SKILL.md | `references/*.md` 命中才读 |
-| hunter | 2500 行 bash 文档 | `scripts/hunt.py` 真跑 |
-| 记忆 | 无 | `scripts/case.py` 案例+AUTH_LOG |
-| 代码审计 | 口头切片 | `scripts/graph.py` 符号/调用/入口 |
-| 免费源 | 埋在长文档里 | recon/hunt 默认 crt.sh + Wayback |
+| | psnb-ops |
+|---|---|
+| 主技能 | 薄路由，约百行 |
+| 轨道 | `references/*.md`，命中才读，一次最多两张 |
+| 猎取 | `scripts/hunt.py`，无 key 的源跳过 |
+| 记忆 | `scripts/case.py` 案例 + `handoff.py` |
+| 代码 | `scripts/graph.py` 符号 / 调用 / 入口 |
+| 侦察 | `recon.py` 先打 crt.sh 和 Wayback |
 
 ## 安装
 
