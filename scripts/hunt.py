@@ -118,7 +118,7 @@ def src_fofa(cfg: dict, query: str) -> list[dict]:
     total = 0
     if isinstance(data, dict):
         total = int(data.get("size") or 0)
-    if total > 20000:
+    if total > 100000:
         log(f"[fofa] total={total} too large, skip pull")
         return []
     size = min(int(cfg.get("page_size") or 100), 100)
@@ -128,6 +128,18 @@ def src_fofa(cfg: dict, query: str) -> list[dict]:
         code, data, _ = json_get(
             f"https://fofa.info/api/v1/search/all?key={key}&qbase64={qb}&size={size}&page={page}&fields=host,ip,port,title,link"
         )
+        # FOFA 限速：45012 请求速度过快 / HTTP 429，退避重试
+        for attempt in range(3):
+            errmsg = str((data or {}).get("errmsg") or "") if isinstance(data, dict) else ""
+            if code == 429 or "45012" in errmsg or "速度过快" in errmsg:
+                wait = 3 * (attempt + 1)
+                log(f"[fofa] rate limited, backoff {wait}s (attempt {attempt + 1}/3)")
+                sleep_ok(wait)
+                code, data, _ = json_get(
+                    f"https://fofa.info/api/v1/search/all?key={key}&qbase64={qb}&size={size}&page={page}&fields=host,ip,port,title,link"
+                )
+            else:
+                break
         results = (data or {}).get("results") if isinstance(data, dict) else []
         if not results:
             break
@@ -139,7 +151,7 @@ def src_fofa(cfg: dict, query: str) -> list[dict]:
                 rows.append({"source": "fofa", "host": r, "url": r})
         if len(results) < size:
             break
-        sleep_ok(1.2)
+        sleep_ok(2.5)
     return rows
 
 
@@ -158,6 +170,20 @@ def src_shodan(cfg: dict, query: str) -> list[dict]:
         host = ip if not port else f"{ip}:{port}"
         rows.append({"source": "shodan", "host": host, "ip": ip, "url": f"http://{host}"})
     return rows
+
+
+def fofa_query(domain: str, fallback: str) -> str:
+    """有 target 时按域名查，否则用原始 query。"""
+    if domain:
+        return f'domain="{domain}"'
+    return fallback
+
+
+def shodan_query(domain: str, fallback: str) -> str:
+    """有 target 时按 hostname 查，否则用原始 query（语法转换）。"""
+    if domain:
+        return f"hostname:{domain}"
+    return fallback.replace("&&", " ").replace("title=", "http.title:")
 
 
 def src_hunter(cfg: dict, query: str) -> list[dict]:
@@ -221,11 +247,11 @@ def main() -> int:
         rows += gh
         collect("github", gh)
     if "fofa" in wanted:
-        ff = src_fofa(cfg, args.query)
+        ff = src_fofa(cfg, fofa_query(domain, args.query))
         rows += ff
         collect("fofa", ff)
     if "shodan" in wanted:
-        sh = src_shodan(cfg, args.query.replace("&&", " ").replace("title=", "http.title:"))
+        sh = src_shodan(cfg, shodan_query(domain, args.query))
         rows += sh
         collect("shodan", sh)
     if "hunter" in wanted:
