@@ -38,7 +38,10 @@ python scripts/hunt.py --target example.com
 python scripts/extract.py hunt/ --probe
 python scripts/report.py
 python scripts/index.py ./some-repo
+python scripts/eval.py
 ```
+
+改完跑 `python scripts/eval.py`，通过再 `git push`。失败不推。仓库：https://github.com/superpengam/psnb-ops
 
 只有标准库。`hunt/` 与 `cases/` 已 gitignore。
 

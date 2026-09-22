@@ -81,6 +81,8 @@ compatibility: Requires python3. Pathlib+urllib stdlib. Optional: curl git nmap 
 
 Windows 一律 `python scripts\xxx.py`；Linux/mac `python3 scripts/xxx.py`。脚本只有标准库。
 
+改本仓库后必须 `python scripts/eval.py`，通过再 `git push`。失败不推。每次更新都推到 `https://github.com/superpengam/psnb-ops`。
+
 ## 比 agent-bypass 多出来的能力
 
 - **真脚本**：`hunt.py` 聚合测绘源；`recon.py` crt.sh/Wayback/头/路径；`extract.py` 80+ 凭证模式；`report.py` HTML；`case.py` 授权+证据链；`index.py` 代码薄索引。
