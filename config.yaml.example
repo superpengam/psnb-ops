@@ -21,6 +21,7 @@ publicwww: ""
 virustotal: ""
 otx: ""
 threatbook: ""
+typesafe: ""
 
 max_pages: 5
 page_size: 100

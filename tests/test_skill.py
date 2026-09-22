@@ -21,7 +21,7 @@ def test_tracks_exist():
         "reverse", "pwn", "pentest", "protocol", "js-reverse", "memory",
         "forensics", "crypto", "mobile", "network", "hunter", "osint",
         "vuln-research", "remediation", "automation", "constitution",
-        "graph", "engineering", "lab", "providers", "catalog", "refusal",
+        "graph", "engineering", "lab", "providers", "catalog", "refusal", "jev",
     ]
     for name in needed:
         assert (refs / f"{name}.md").exists(), name

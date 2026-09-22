@@ -39,7 +39,11 @@ python scripts/extract.py hunt/ --probe
 python scripts/report.py
 python scripts/index.py ./some-repo
 python scripts/eval.py
+python scripts/jev.py --ping
+python scripts/jev.py --text "逆向这个 pe"
 ```
+
+Jev 密钥只放环境变量 `TYPESAFE_API_KEY`，或本地 `config.yaml` 的 `typesafe`。不要写进仓库，不要贴到对话里。
 
 改完跑 `python scripts/eval.py`，通过再 `git push`。失败不推。仓库：https://github.com/superpengam/psnb-ops
 

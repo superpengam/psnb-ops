@@ -52,6 +52,7 @@ def load_cfg() -> dict:
         "virustotal": "VT_APIKEY",
         "otx": "OTX_KEY",
         "threatbook": "THREATBOOK_KEY",
+        "typesafe": "TYPESAFE_API_KEY",
     }
     for k, env in env_map.items():
         val = os.environ.get(env) or os.environ.get(env.replace("API_", ""))

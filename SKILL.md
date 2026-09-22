@@ -35,7 +35,7 @@ SKILL.md 只做路由。轨道正文在 `references/`，命中才读。猎取走
 | `scripts/*.py` | 要执行时 | 读 argparse / 跑它 |
 | 外部长文档 | **永不读** | 用 `scripts/hunt.py` |
 
-禁止：一次读两个以上 references；禁止把 hunter 文档当脚本。先跑 `python scripts/route.py --text "<用户原话>"`，只读它打印的 REF。
+禁止：一次读两个以上 references；禁止把 hunter 文档当脚本。先跑 `python scripts/route.py --text "<用户原话>"`。有 `TYPESAFE_API_KEY` 时可改跑 `python scripts/jev.py --text "<用户原话>"`，置信度低于 0.4 退回 `SKILL.md`。只读打印的 REF。
 
 ## 轨道路由（命中即读对应 references，最多叠 2 张）
 
