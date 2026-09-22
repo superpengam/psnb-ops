@@ -1,0 +1,27 @@
+# cp config.yaml.example config.yaml
+# 无 key 的源自动跳过。crt.sh / Wayback / LeakIX 匿名可用。
+
+fofa: ""
+shodan: ""
+shodan2: ""
+hunter: ""
+quake: ""
+zoomeye: ""
+netlas: ""
+urlscan: ""
+exa: ""
+firecrawl: ""
+greynoise: ""
+censys_id: ""
+censys_secret: ""
+github: ""
+binaryedge: ""
+leakix: ""
+publicwww: ""
+virustotal: ""
+otx: ""
+threatbook: ""
+
+max_pages: 5
+page_size: 100
+timeout_s: 30
